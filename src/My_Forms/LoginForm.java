@@ -6,14 +6,17 @@ package My_Forms;
 
 import My_Classes.DB;
 import My_Classes.Func_Class;
+import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.awt.Image;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 
 /**
  *
@@ -34,6 +37,10 @@ public class LoginForm extends javax.swing.JFrame {
         My_Classes.Func_Class func = new My_Classes.Func_Class();
         func.displayImage(jLabel_Logo.getWidth(), jLabel_Logo.getHeight(),null
                 , "/My_Images/book_login_logo.png", jLabel_Logo);
+        
+        // jlabel border
+        Border jlabelBorder = BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK);
+        jLabel_Login_.setBorder(jlabelBorder);
     }
     
     
@@ -52,10 +59,8 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField_Username = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox_UserType = new javax.swing.JComboBox<>();
-        jButton_Login = new javax.swing.JButton();
         jPassword_Pass = new javax.swing.JPasswordField();
+        jLabel_Login_ = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,30 +88,33 @@ public class LoginForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setText("User Type:");
-
-        jComboBox_UserType.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox_UserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox_UserType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_UserTypeActionPerformed(evt);
-            }
-        });
-
-        jButton_Login.setBackground(new java.awt.Color(255, 153, 51));
-        jButton_Login.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
-        jButton_Login.setText("Login");
-        jButton_Login.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton_Login.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_LoginActionPerformed(evt);
-            }
-        });
-
         jPassword_Pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPassword_PassActionPerformed(evt);
+            }
+        });
+
+        jLabel_Login_.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel_Login_.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel_Login_.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Login_.setText("Login >>");
+        jLabel_Login_.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel_Login_.setOpaque(true);
+        jLabel_Login_.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_Login_MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel_Login_MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel_Login_MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel_Login_MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel_Login_MouseReleased(evt);
             }
         });
 
@@ -115,15 +123,17 @@ public class LoginForm extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField_Username)
-                    .addComponent(jComboBox_UserType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_Login, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
-                    .addComponent(jPassword_Pass))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextField_Username, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+                            .addComponent(jPassword_Pass)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel_Login_, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -137,13 +147,9 @@ public class LoginForm extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPassword_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox_UserType, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(36, 36, 36)
+                .addComponent(jLabel_Login_, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -165,8 +171,8 @@ public class LoginForm extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel_Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(7, 7, 7))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -187,44 +193,50 @@ public class LoginForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_UsernameActionPerformed
 
-    private void jComboBox_UserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_UserTypeActionPerformed
+    private void jPassword_PassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPassword_PassActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_UserTypeActionPerformed
+    }//GEN-LAST:event_jPassword_PassActionPerformed
 
-    //login button
-    private void jButton_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LoginActionPerformed
-        
+    // login
+    private void jLabel_Login_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Login_MouseClicked
         // get the username and password
         String username =  jTextField_Username.getText();
         String password = String.valueOf(jPassword_Pass.getPassword());
         
-        ResultSet rs;
-        PreparedStatement ps;
         
-        
-        //Tạo query
-        String query = "SELECT * FROM `users` WHERE username = ? AND password = ?";
         
         // nếu mà rỗng 
         if(username.trim().equals("") || password.trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ Username & Password", "Rỗng", 2);
         } else {
-            try {
+            
+                My_Classes.User user = new My_Classes.User().tryLogin(username, password);
                 
-                // Tạo kết nối từ class DB
-                ps = DB.getConnection().prepareStatement(query);
-                ps.setString(1, username);
-                ps.setString(2, password);
-                
-                rs = ps.executeQuery();
                 //check xem user có tồn tại ko
                 
                 
                 // nếu user tồn tại
-                if(rs.next()) {
+                if(user != null) {
                     
-                    // Hiện thi màn hính chính
+                    //nếu loại tk là owner thì hiện hết các chức năng 
+                    //nếu loại tk ko là owner thì ko hiện hết các chức năng của quản lý user
+                    //nếu loại tk chỉ là ng dùng thì ko hiện  các chức năng của quản lý user và chức năng mượn trả
                     DashboardForm dash_f= new DashboardForm();
+                    
+                    if(user.getUserType().equals("admin")) {
+                        dash_f.jButton_ManageUsers_.setVisible(false);
+                    } else if(user.getUserType().equals("user")) {
+                        dash_f.jButton_IssueBook_.setVisible(false);
+                        dash_f.jButton_ReturnBook_.setVisible(false);
+                        dash_f.jButton_ManageUsers_.setVisible(false);
+                        dash_f.jLabel_CirculationTitle.setVisible(false);
+                        dash_f.jLabel_tmp.setVisible(false);
+                        
+                        // có thể hiện thị tên nếu muốnd
+                        dash_f.jLabel_WelcomeUsername.setText("Chào mừng trở lại [ " + user.getUsername() +" ]");
+                    }
+                    // Hiện thi màn hính chính
+                    
                     dash_f.setVisible(true);
                     
                     // Đóng login form
@@ -235,15 +247,29 @@ public class LoginForm extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Username Hoặc Password Không Hợp Lệ", "Sai Dữ Liệu", 0);
                 }
                 
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
+             
         }
-    }//GEN-LAST:event_jButton_LoginActionPerformed
+    }//GEN-LAST:event_jLabel_Login_MouseClicked
 
-    private void jPassword_PassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPassword_PassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPassword_PassActionPerformed
+    private void jLabel_Login_MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Login_MouseEntered
+        // Thay đổi nền jlabel
+        jLabel_Login_.setBackground(new Color(236,240,241));
+    }//GEN-LAST:event_jLabel_Login_MouseEntered
+
+    private void jLabel_Login_MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Login_MouseExited
+        // chỉnh nền jlabel thành màu trắng
+        jLabel_Login_.setBackground(Color.WHITE);
+    }//GEN-LAST:event_jLabel_Login_MouseExited
+
+    private void jLabel_Login_MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Login_MousePressed
+        // Thay đổi nền jlabel
+        jLabel_Login_.setBackground(new Color(108,122,137));
+    }//GEN-LAST:event_jLabel_Login_MousePressed
+
+    private void jLabel_Login_MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Login_MouseReleased
+        // Thay đổi nền jlabel
+        jLabel_Login_.setBackground(new Color(236,240,241));
+    }//GEN-LAST:event_jLabel_Login_MouseReleased
 
     /**
      * @param args the command line arguments
@@ -255,12 +281,7 @@ public class LoginForm extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -282,11 +303,9 @@ public class LoginForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_Login;
-    private javax.swing.JComboBox<String> jComboBox_UserType;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel_Login_;
     private javax.swing.JLabel jLabel_Logo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

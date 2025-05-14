@@ -496,6 +496,8 @@ public class ReturnBookForm extends javax.swing.JFrame {
         //cập nhật ngày trả
         //ghi chú
         // và trạng thái trả    
+        // NOTE: nếu thay đổi trang thái từ LOST sang RETURN bạn cần update quantity
+        //hoặc ngăn chặn user thay đổi trang thái khi LOST
         int bookId = (int) jSpinner_BookID.getValue();
         int memberId = (int) jSpinner_MemberID.getValue();
         String note = jTextArea_Note.getText();
@@ -553,6 +555,17 @@ public class ReturnBookForm extends javax.swing.JFrame {
             String issuedDate= jTable_IssuedBooks_.getValueAt(index, 3).toString();
         
             issueBook.removeFromIssuedTable(bookId, memberId, issuedDate);
+            
+            // dọn các ô
+            jSpinner_BookID.setValue(0);
+            jSpinner_MemberID.setValue(0);
+            
+            jLabel_BookName_.setText("Tên Sách");
+            jLabel_MemberName_.setText("Tên Thành Viên");
+            jDateChooser_IssueDate.setDate(new Date());
+            jDateChooser_Return_Date.setDate(new Date()); 
+            jTextArea_Note.setText("");
+            
         } catch(Exception ex) {
             JOptionPane.showMessageDialog(null,"Chon phần muốn xóa khỏi bảng" + ex.getMessage(), "Lỗi Xóa",2);
         }

@@ -89,7 +89,7 @@ public class EditMemberForm extends javax.swing.JFrame {
         jButton_Edit_ = new javax.swing.JButton();
         jLabel_EmptyName_ = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField_Phone = new javax.swing.JTextField();
+        jTextField_Phone_ = new javax.swing.JTextField();
         jLabel_EmptyPhone_ = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTextField_Email = new javax.swing.JTextField();
@@ -188,10 +188,15 @@ public class EditMemberForm extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("SĐT:");
 
-        jTextField_Phone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField_Phone.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_Phone_.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField_Phone_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_PhoneActionPerformed(evt);
+                jTextField_Phone_ActionPerformed(evt);
+            }
+        });
+        jTextField_Phone_.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_Phone_KeyTyped(evt);
             }
         });
 
@@ -274,7 +279,7 @@ public class EditMemberForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTextField_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField_Name, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField_Phone)
+                            .addComponent(jTextField_Phone_)
                             .addComponent(jTextField_Email))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -326,7 +331,7 @@ public class EditMemberForm extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_Phone, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_Phone_, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_EmptyPhone_, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -381,7 +386,7 @@ public class EditMemberForm extends javax.swing.JFrame {
         
         //Lấy dữ liệu của thành viên
         String name = jTextField_Name.getText();
-        String phone = jTextField_Phone.getText();
+        String phone = jTextField_Phone_.getText();
         String email = jTextField_Email.getText();
         String gender = jComboBox_Gender.getSelectedItem().toString();
         
@@ -400,8 +405,8 @@ public class EditMemberForm extends javax.swing.JFrame {
                     Path path = Paths.get(imagePath);
                     img = Files.readAllBytes(path);
                     member.editMember(id,name, phone, email, gender, img);
-                } catch (IOException ex) {
-                    Logger.getLogger(EditMemberForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException | NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Hãy chắc chắn nhập ID & Chọn ảnh hồ sơ", "Không ID hoặc ảnh nào được chọn",2);
                 }            
             } else {
                 JOptionPane.showMessageDialog(null, "Chọn ảnh hồ sơ cho member này", "Không ảnh nào được chọn",2);
@@ -424,9 +429,9 @@ public class EditMemberForm extends javax.swing.JFrame {
         jLabel_EmptyName_.setVisible(false);
     }//GEN-LAST:event_jLabel_EmptyName_MouseClicked
 
-    private void jTextField_PhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_PhoneActionPerformed
+    private void jTextField_Phone_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_Phone_ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_PhoneActionPerformed
+    }//GEN-LAST:event_jTextField_Phone_ActionPerformed
 
     private void jLabel_EmptyPhone_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_EmptyPhone_MouseClicked
         jLabel_EmptyPhone_.setVisible(false);
@@ -465,7 +470,7 @@ public class EditMemberForm extends javax.swing.JFrame {
             if(selectedMember != null) {
                 jTextField_ID.setText(String.valueOf(selectedMember.getId()));
                 jTextField_Name.setText(selectedMember.getName());
-                jTextField_Phone.setText(selectedMember.getPhone());
+                jTextField_Phone_.setText(selectedMember.getPhone());
                 jTextField_Email.setText(selectedMember.getEmail());
                 jComboBox_Gender.setSelectedItem(selectedMember.getGender());
             
@@ -485,6 +490,13 @@ public class EditMemberForm extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton_Search_ActionPerformed
+
+    private void jTextField_Phone_KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_Phone_KeyTyped
+        // Chỉ có số trông ô sdt
+        if(Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField_Phone_KeyTyped
 
     /**
      * @param args the command line arguments
@@ -556,6 +568,6 @@ public class EditMemberForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_Email;
     private javax.swing.JTextField jTextField_ID;
     private javax.swing.JTextField jTextField_Name;
-    private javax.swing.JTextField jTextField_Phone;
+    private javax.swing.JTextField jTextField_Phone_;
     // End of variables declaration//GEN-END:variables
 }

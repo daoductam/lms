@@ -328,7 +328,7 @@ public class ManageAuthorsForm extends javax.swing.JFrame {
         String about = jTextArea_About.getText();
         
         // checke nếu textfield rỗng
-        if(name.isEmpty()) {
+        if(name.trim().isEmpty()) {
             jLabel_EmptyName_.setVisible(true);
         } else // nếu ko rỗng
         {
@@ -338,6 +338,9 @@ public class ManageAuthorsForm extends javax.swing.JFrame {
                 
                 //Tải lại thể loại trong bảng JTable
                 populateJTableWithAuthors();
+                
+                //ẩn jlabel
+                jLabel_EmptyName_.setVisible(false);
             } catch(NumberFormatException  ex) {
                 JOptionPane.showMessageDialog(null, "ID Tác giả không hợp lệ - " + ex.getMessage(), "Lỗi",0);
 
@@ -358,8 +361,11 @@ public class ManageAuthorsForm extends javax.swing.JFrame {
         } else // nếu ko rỗng
         {
             author.addAuthor(name, expertise, about);
-            //Tải lại thể loại trong bảng JTable
+            //Tải lại author trong bảng JTable
             populateJTableWithAuthors();
+            
+            //ẩn jlabel
+            jLabel_EmptyName_.setVisible(false);
         }
     }//GEN-LAST:event_jButton_Add_ActionPerformed
 
@@ -385,8 +391,11 @@ public class ManageAuthorsForm extends javax.swing.JFrame {
                  } 
                 
                 
-                //Tải lại thể loại trong bảng JTable
+                //Tải lại author trong bảng JTable
                 populateJTableWithAuthors();
+                
+                //ẩn jlabel
+                jLabel_EmptyName_.setVisible(false);
                 
                 // clear text form the textfields
                 jTextField_ID.setText("");

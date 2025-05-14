@@ -229,6 +229,12 @@ public class DeleteMemberForm extends javax.swing.JFrame {
             
             if(confirm == JOptionPane.YES_OPTION) {
                 member.removeMember(id);
+                
+                //dọn textfield
+                jTextField_ID.setText("");
+                
+                //ẩn jlabel (thông báo rỗng)
+                jLabel_EmptyID_.setForeground(Color.WHITE);
             } 
             
         } catch (Exception e) {

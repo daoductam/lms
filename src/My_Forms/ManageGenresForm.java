@@ -318,6 +318,9 @@ public class ManageGenresForm extends javax.swing.JFrame {
                 int id = Integer.parseInt(jTextField_ID.getText());
                 genre.editGenre(id, name);
                 
+                // ẩn jlabel
+                jLabel_EmptyName_.setVisible(false);
+                
                 //Tải lại thể loại trong bảng JTable
                 populateJTableWithGenres();
             } catch(NumberFormatException  ex) {
@@ -338,6 +341,10 @@ public class ManageGenresForm extends javax.swing.JFrame {
         } else // nếu ko rỗng
         {
             genre.addGenre(name);
+            
+            // ẩn jlabel
+            jLabel_EmptyName_.setVisible(false);
+            
             //Tải lại thể loại trong bảng JTable
             populateJTableWithGenres();
         }

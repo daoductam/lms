@@ -2,14 +2,7 @@ create database java_library_system;
 
 use java_library_system;
 
-create table users
-(
-	 id int primary key auto_increment,
-     username varchar(120),
-     `password` varchar(30),
-     usertype  varchar(50)
-     
-);
+
 insert into users (id, username,`password`, usertype) values (NULL,'u_admin', 'pass', 'admin');
 create table book_genres 
 (
@@ -46,9 +39,21 @@ create table book
     price double,
     date_received date,
     description text,
-    cover_image longblob
+    cover_image longblob,
+     CONSTRAINT fk_author_id FOREIGN KEY (author_id) REFERENCES author(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+	CONSTRAINT fk_genre_id FOREIGN KEY (genre_id) REFERENCES book_genres(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
+-- alter table book add constraint fk_author_id foreign key(author_id) references author(id) on update cascade on DELETE cascade;
+-- alter table book add CONSTRAINT fk_genre_id FOREIGN KEY (genre_id) REFERENCES book_genres(id)
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE;
+        
+        
 alter table book drop primary key;
 alter table book add id int not null auto_increment first, add primary key(id);
 alter table book add unique(isbn);
@@ -63,9 +68,20 @@ create table issue_book
     status nvarchar (50) ,
     issue_date date,
     return_date date,
-    note text
+    note text,
+    CONSTRAINT fk_book_id FOREIGN KEY (book_id) REFERENCES book(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+	CONSTRAINT fk_member_id FOREIGN KEY (member_id) REFERENCES member(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
-
+ -- alter table issue_book add CONSTRAINT fk_book_id FOREIGN KEY (book_id) REFERENCES book(id)
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE;
+--  alter table issue_book add	CONSTRAINT fk_member_id FOREIGN KEY (member_id) REFERENCES member(id)
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE;
 create table users_table 
 (
 	id int primary key auto_increment,
@@ -73,7 +89,8 @@ create table users_table
     username varchar(100),
     password varchar(100),
     user_type nvarchar(20)
-)
+);
+
 
 
 

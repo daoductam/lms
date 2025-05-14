@@ -420,6 +420,9 @@ public class ManageUsersForm extends javax.swing.JFrame {
                     jPasswordField_1.setText("");
                     jPasswordField_2.setText("");
                     jCheckBox_SetAdmin.setSelected(false);
+                    
+                    //ẩn jlabel
+                    hideLabels();
                 }
             } catch(NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null,"Chọn User muốn chỉnh sửa trong bảng ", "Không có ID được chọn", 0);
@@ -471,6 +474,9 @@ public class ManageUsersForm extends javax.swing.JFrame {
             jPasswordField_1.setText("");
             jPasswordField_2.setText("");
             jCheckBox_SetAdmin.setSelected(false);
+            
+            //ẩn jlabel
+            hideLabels();
         }
     }//GEN-LAST:event_jButton_Add_ActionPerformed
 
@@ -507,6 +513,9 @@ public class ManageUsersForm extends javax.swing.JFrame {
                 jPasswordField_1.setText("");
                 jPasswordField_2.setText("");
                 jCheckBox_SetAdmin.setSelected(false);
+                
+                //ẩn jlabel
+                hideLabels();
             } catch(NumberFormatException  ex) {
                 JOptionPane.showMessageDialog(null, "ID User không hợp lệ - " + ex.getMessage(), "Lỗi",0);
 
@@ -581,6 +590,13 @@ public class ManageUsersForm extends javax.swing.JFrame {
         jLabel_EmptyPassword_.setForeground(Color.white);
     }//GEN-LAST:event_jLabel_EmptyPassword_MouseClicked
 
+    
+    //tạo phương thức ẩn các jlabel(thông báo đỏ)
+    public void hideLabels() {
+        jLabel_EmptyName_.setForeground(Color.WHITE);
+        jLabel_EmptyPassword_.setForeground(Color.WHITE);
+        jLabel_EmptyUserName_.setForeground(Color.WHITE);
+    }
     /**
      * @param args the command line arguments
      */

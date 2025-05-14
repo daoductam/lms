@@ -182,7 +182,8 @@ public class User {
         
        
         try {
-            ResultSet rs  = func.getData("SELECT * FROM users_table");
+            // ko hiện dữ liệu owner
+            ResultSet rs  = func.getData("SELECT * FROM users_table  where user_type <> 'owner'");
             User user;
             
             while(rs.next()) {
@@ -196,5 +197,20 @@ public class User {
         return uList;
     }
     
-    
+    // Tạo phương thức để cho phép user đăng nhập
+    public User tryLogin(String username, String password) {
+        
+        ResultSet rs  = func.getData("SELECT * FROM users_table WHERE username = '"+username+"' AND password = '"+password+"'");
+        User user = null;
+            
+        try {
+            while(rs.next()) {
+                user = new User(rs.getInt("id"),rs.getString("name"), rs.getString("username"), rs.getString("password"),rs.getString("user_type"));
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
 }

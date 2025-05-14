@@ -178,6 +178,14 @@ public class AddMemberForm extends javax.swing.JFrame {
                 jTextField_PhoneActionPerformed(evt);
             }
         });
+        jTextField_Phone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField_PhoneKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_PhoneKeyTyped(evt);
+            }
+        });
 
         jLabel_EmptyPhone_.setForeground(new java.awt.Color(253, 0, 0));
         jLabel_EmptyPhone_.setText("* Nhập SĐT");
@@ -379,10 +387,24 @@ public class AddMemberForm extends javax.swing.JFrame {
     private void jButton_SelectProfilePicture_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SelectProfilePicture_ActionPerformed
         // lấy ảnh từ máy tính
         String path = func.selectImage();
-        jLabel_ImagePath.setText(path);
-        imagePath  = path;
+        if(path.equals("")) {
+            jLabel_ImagePath.setText(path);
+            imagePath  = path;
+        }
+        
         
     }//GEN-LAST:event_jButton_SelectProfilePicture_ActionPerformed
+
+    private void jTextField_PhoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_PhoneKeyPressed
+        
+    }//GEN-LAST:event_jTextField_PhoneKeyPressed
+
+    private void jTextField_PhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_PhoneKeyTyped
+        // Chỉ có số trông ô sdt
+        if(Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField_PhoneKeyTyped
 
     /**
      * @param args the command line arguments
